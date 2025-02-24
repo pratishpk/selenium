@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Selenium Practice Page</title>
+    <style>
+        body { 
+            font-family: Arial, sans-serif; 
+            margin: 0; 
+            padding: 0; 
+            background: #f4f4f4; 
+            display: flex; 
+            justify-content: center; 
+            align-items: center; 
+            height: 100vh;
+        }
+        .container { 
+            background: white; 
+            padding: 20px; 
+            border-radius: 10px; 
+            box-shadow: 0px 0px 10px rgba(0,0,0,0.1); 
+            width: 500px; 
+            text-align: center;
+            overflow-y: auto;
+            max-height: 90vh;
+        }
+        .box { 
+            margin-bottom: 20px; 
+        }
+        input, select, button, textarea { 
+            width: 100%; 
+            padding: 10px; 
+            margin-top: 5px; 
+            border: 1px solid #ccc; 
+            border-radius: 5px; 
+        }
+        button { 
+            background: #007BFF; 
+            color: white; 
+            border: none; 
+            cursor: pointer;
+        }
+        button:hover { 
+            background: #0056b3; 
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        table, th, td {
+            border: 1px solid #ddd;
+        }
+        th, td {
+            padding: 10px;
+            text-align: left;
+        }
+        .context-menu {
+            display: none;
+            position: absolute;
+            background: white;
+            border: 1px solid #ccc;
+            box-shadow: 2px 2px 5px rgba(0,0,0,0.2);
+            padding: 10px;
+            z-index: 1000;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Selenium Practice Page</h2>
+
+        <!-- SendKeys -->
+        <div class="box">
+            <label for="textInput">Enter Text:</label>
+            <input type="text" id="textInput" placeholder="Type here...">
+        </div>
+
+        <!-- Click -->
+        <div class="box">
+            <button id="clickButton">Click Me</button>
+        </div>
+
+        <!-- Checkbox -->
+        <div class="box">
+            <input type="checkbox" id="checkbox">
+            <label for="checkbox">Check me</label>
+        </div>
+
+        <!-- Radio Buttons -->
+        <div class="box">
+            <label>Choose One:</label><br>
+            <input type="radio" id="radio1" name="radiogroup" value="option1"> Option 1
+            <input type="radio" id="radio2" name="radiogroup" value="option2"> Option 2
+        </div>
+
+        <!-- Dropdown -->
+        <div class="box">
+            <label for="dropdown">Select an Option:</label>
+            <select id="dropdown">
+                <option value="option1">Option 1</option>
+                <option value="option2">Option 2</option>
+                <option value="option3">Option 3</option>
+            </select>
+        </div>
+
+        <!-- Textarea -->
+        <div class="box">
+            <label for="textarea">Enter Some Text:</label>
+            <textarea id="textarea" rows="4" placeholder="Type something..."></textarea>
+        </div>
+
+        <!-- File Upload -->
+        <div class="box">
+            <label for="fileInput">Upload a File:</label>
+            <input type="file" id="fileInput">
+        </div>
+
+        <!-- Alert Button -->
+        <div class="box">
+            <button onclick="showAlert()">Show Alert</button>
+        </div>
+
+        <!-- Table -->
+        <div class="box">
+            <h3>Sample Table</h3>
+            <table>
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Action</th>
+                </tr>
+                <tr>
+                    <td>1</td>
+                    <td>John Doe</td>
+                    <td><button onclick="editRow(1)">Edit</button></td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td>Jane Smith</td>
+                    <td><button onclick="editRow(2)">Edit</button></td>
+                </tr>
+            </table>
+        </div>
+
+        <!-- Double Click -->
+        <div class="box">
+            <button id="doubleClickButton">Double Click Me</button>
+        </div>
+
+        <!-- Right Click -->
+        <div class="box">
+            <button id="rightClickButton">Right Click Me</button>
+            <div class="context-menu" id="contextMenu">
+                <p>Right-click action detected</p>
+            </div>
+        </div>
+
+        <!-- Open New Window -->
+        <div class="box">
+            <button onclick="openNewWindow()">Open New Tab</button>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById("clickButton").addEventListener("click", function() {
+            alert("Button Clicked!");
+        });
+
+        function showAlert() {
+            alert("This is an alert box!");
+        }
+
+        function editRow(id) {
+            alert("Editing row " + id);
+        }
+
+        function openNewWindow() {
+            window.open("https://www.google.com", "_blank");
+        }
+
+        // Double Click Event
+        document.getElementById("doubleClickButton").addEventListener("dblclick", function() {
+            alert("Double Clicked!");
+        });
+
+        // Right Click Event
+        document.getElementById("rightClickButton").addEventListener("contextmenu", function(event) {
+            event.preventDefault();
+            const contextMenu = document.getElementById("contextMenu");
+            contextMenu.style.left = `${event.pageX}px`;
+            contextMenu.style.top = `${event.pageY}px`;
+            contextMenu.style.display = "block";
+        });
+
+        document.addEventListener("click", function() {
+            document.getElementById("contextMenu").style.display = "none";
+        });
+
+        // Scroll to element
+        window.addEventListener("scroll", function() {
+            console.log("Page is scrolling...");
+        });
+    </script>
+</body>
+</html>
